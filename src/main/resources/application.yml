@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce_db
+    username: ecommerce_user
+    password: ecommerce_pass
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
