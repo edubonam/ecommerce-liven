@@ -30,7 +30,7 @@ class CheckoutServiceImpl implements CheckoutService{
                 .orElseThrow { new CustomException("Invalid Cart!") }
 
         if (cart.user.id != userId) {
-            throw new IllegalArgumentException("This is not your cart!")
+            throw new CustomException("This is not your cart!")
         }
 
         BigDecimal totalPrice = 0
@@ -38,7 +38,9 @@ class CheckoutServiceImpl implements CheckoutService{
             def product = cartProduct.product
 
             if (cartProduct.quantity > product.quantity) {
-                throw new IllegalArgumentException("Quantity of product '${product.name}' exceeds available stock (${product.quantity}).")
+                throw new CustomException(
+                        "Quantity of product '${product.name}' exceeds available stock (${product.quantity})."
+                )
             }
 
             product.quantity -= cartProduct.quantity

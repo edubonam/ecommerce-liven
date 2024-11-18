@@ -18,7 +18,7 @@ class UserServiceImpl implements UserService{
     @Override
     User createUser(UserDTO userDTO) {
         if (userRepository.findByEmail(userDTO.email()) != null) {
-            new CustomException("Invalid User, email already exists!")
+            throw new CustomException("Invalid User, email already exists!")
         }
 
         User newUser = new User()

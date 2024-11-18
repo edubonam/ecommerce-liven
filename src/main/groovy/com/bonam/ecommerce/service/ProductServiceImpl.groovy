@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
-import org.springframework.data.domain.Pageable;
 
 @Service
 class ProductServiceImpl implements ProductService{
@@ -24,8 +23,8 @@ class ProductServiceImpl implements ProductService{
 
     @Override
     Page<ProductDTO> getPaginatedProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size)
-        return productRepository.findByQuantityGreaterThan(0, pageable).map {return new ProductDTO().fromDomain(it)}
+        def pageable = PageRequest.of(page, size)
+        productRepository.findByQuantityGreaterThan(0, pageable).map {return new ProductDTO().fromDomain(it)}
     }
 
     @Override
@@ -35,7 +34,6 @@ class ProductServiceImpl implements ProductService{
             verifyBeforeUpdate(product)
          else
             verifyBeforeInsert(product)
-
 
         return new ProductDTO().fromDomain(productRepository.save(product))
     }

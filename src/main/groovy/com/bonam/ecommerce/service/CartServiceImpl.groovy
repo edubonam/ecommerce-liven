@@ -38,7 +38,7 @@ class CartServiceImpl implements CartService{
                 .orElseThrow { new CustomException("Invalid Cart!") }
 
         if (cart.user.id != user.id) {
-            throw new IllegalArgumentException("This is not your cart!")
+            throw new CustomException("This is not your cart!")
         }
 
         request.products.each { dto ->
@@ -62,10 +62,10 @@ class CartServiceImpl implements CartService{
     CartDTO getCartById(Long cartId, Long userId) {
 
         def cart = cartRepository.findById(cartId)
-                .orElseThrow { new CustomException("Invalid cart!") }
+                .orElseThrow { new CustomException("Invalid Cart!") }
 
         if (cart.user.id != userId) {
-            throw new IllegalAccessException("This is not your cart!")
+            throw new CustomException("This is not your cart!")
         }
 
         return new CartDTO().fromDomain(cart)

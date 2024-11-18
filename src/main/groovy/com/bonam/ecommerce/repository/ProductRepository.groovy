@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository
 import org.springframework.data.domain.Pageable;
 
 @Repository
-interface ProductRepository extends JpaRepository<Product, String> {
+interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByQuantityGreaterThan(int value, Pageable pageable);
 
     Optional<Product> findBySku(String sku);
